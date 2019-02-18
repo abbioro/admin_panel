@@ -9,24 +9,24 @@
 </head>
 
 <body>
-  <h1>AdminPanel</h1>
+    <h1>AdminPanel</h1>
 
-  <form method="post" action="login">
-    <div>
-      <label for="user_name">Username</label>
-      <input type="text" id="user_name" name="user_name">
-    </div>
+  <div class="login">
 
-    <div>
-      <label for="user_password">Password</label>
-      <input type="password" id="user_password" name="user_password">
-    </div>
+    <form method="post" action="login">
+      <div>
+        <input type="text" id="user_name" name="user_name" placeholder="Username">
+      </div>
 
-    <div class="button">
-      <button type="submit">Login</button>
-    </div>
-  </form>
+      <div>
+        <input type="password" id="user_password" name="user_password" placeholder="Password">
+      </div>
 
+      <div class="button">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+  </div>
 </body>
 
 </html>

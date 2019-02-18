@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.post('/', function(req, res, next) {
     if (req.body.user_name === "abbi") {
-        res.send("logging in");
+        res.redirect('/admin')
     } else {
         res.send(req.body);
     }

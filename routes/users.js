@@ -1,10 +1,16 @@
 var express = require('express');
+var db = require('../src/db');
+
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-  // res.render('admin', { title: 'Admin' });
+router.get('/', function (req, res, next) {
+    db.all('SELECT * FROM users', function (error, rows) {
+        if (error) {
+            console.log(error);
+        } else {
+            res.json(rows);
+        }
+    });
 });
 
 module.exports = router;

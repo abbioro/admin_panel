@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html>
-    
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>AdminPanel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
-    <p>Logged in!</p>
+        <p>Logged in!</p>
+
+        <table>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Date created</th>
+                <th scope="col">Login count</th>
+            </tr>
+            <!-- foreach user, add a TR w/ necessary fields -->
+            <tr>
+                <td>foo</td>
+                <td>bar</td>
+                <td>baz</td>
+            </tr>
+        </table>
+        <div id="admin_panel">
+
+        <p>{{ users }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="/javascripts/admin.js"></script>
 </body>
 
 </html>
