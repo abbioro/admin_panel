@@ -12,26 +12,19 @@
 <body>
   <p>Logged in!</p>
 
-  <table>
-    <tr>
-      <th scope="col">Username</th>
-      <th scope="col">Date created</th>
-      <th scope="col">Login count</th>
-    </tr>
-    <!-- foreach user, add a TR w/ necessary fields -->
-    <tr>
-      <td>foo</td>
-      <td>bar</td>
-      <td>baz</td>
-    </tr>
-  </table>
-
   <div id="admin_panel">
-    <ul id="example-1">
-      <li v-for="user in users">
-        {{ user }}
-      </li>
-    </ul>
+    <table>
+      <tr>
+        <th scope="col">User ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+      </tr>
+      <tr v-for="user in users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+    </table>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
