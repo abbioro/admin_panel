@@ -25,12 +25,17 @@
       <td>baz</td>
     </tr>
   </table>
-  
+
   <div id="admin_panel">
-    <p>{{ users }}</p>
+    <ul id="example-1">
+      <li v-for="user in users">
+        {{ user }}
+      </li>
+    </ul>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="/javascripts/admin.js"></script>
 </body>
 

@@ -1,16 +1,12 @@
+var data = {
+    users: []
+};
+
+axios.get('/users').then((res) => {
+    data.users = data.users.concat(res.data);
+});
+
 var vm = new Vue({
     el: '#admin_panel',
-    data: {
-        // users: [1, 2, 3]
-    },
-    // computed: {
-    //     users: function() {
-    //         return [{name: "foo"}, {name: "bar"}];
-    //     }
-    // }
-    // computed: {
-    //     users: function() {
-
-    //     }
-    // }
-});
+    data: data
+}); 
