@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var adminRouter = require('./routes/admin');
 var usersRouter = require('./routes/users');
-var htmlEngine = require('./src/html_engine');
+var htmlEngine = require('./lib/html_engine');
 
 var app = express();
 

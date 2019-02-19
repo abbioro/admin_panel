@@ -1,5 +1,5 @@
 var express = require('express');
-var db = require('../src/db');
+var db = require('../lib/db');
 
 var router = express.Router();
 
