@@ -17,13 +17,13 @@ router.get('/', function (req, res, next) {
 // Update multiple users at once
 router.patch('/', function (req, res, next) {
     if (req.body.action === 'usersDisable') {
-        req.body.checkedUsers.forEach(id => {
+        req.body.userIds.forEach(id => {
             db.run('UPDATE users SET enabled = ? WHERE id = ?', 0, id);
         });
         res.send(204);
     }
     if (req.body.action === 'usersEnable') {
-        req.body.checkedUsers.forEach(id => {
+        req.body.userIds.forEach(id => {
             db.run('UPDATE users SET enabled = ? WHERE id = ?', 1, id);
         });
         res.send(204);

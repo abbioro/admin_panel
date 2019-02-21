@@ -3,13 +3,7 @@ var data = {
     checkedUsers: []
 };
 
-function updateUsers() {
-    axios.get('/users').then((res) => {
-        data.users = res.data;
-    });
-}
-
-updateUsers();
+getUsers();
 
 var vm = new Vue({
     el: '#admin_panel',
@@ -17,19 +11,25 @@ var vm = new Vue({
     methods: {
         usersDisable: function (event) {
             axios.patch('/users', {
-                checkedUsers: this.checkedUsers,
+                userIds: this.checkedUsers,
                 action: "usersDisable"
             });
-            updateUsers();
+            getUsers();
             this.checkedUsers = [];
         },
         usersEnable: function (event) {
             axios.patch('/users', {
-                checkedUsers: this.checkedUsers,
+                userIds: this.checkedUsers,
                 action: "usersEnable"
             });
-            updateUsers();
+            getUsers();
             this.checkedUsers = [];
         }
     }
 }); 
+
+function getUsers() {
+    axios.get('/users').then((res) => {
+        data.users = res.data;
+    });
+}
