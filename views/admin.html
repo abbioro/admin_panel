@@ -30,8 +30,8 @@
         </tr>
       </table>
 
-      <button type="submit" v-on:click="usersDisable">Disable</button>
-      <button type="submit" v-on:click="usersEnable">Enable</button>
+      <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="usersDisable">Disable</button>
+      <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="usersEnable">Enable</button>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
