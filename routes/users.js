@@ -3,6 +3,7 @@ var db = require('../lib/db');
 
 var router = express.Router();
 
+// Get users as JSON
 router.get('/', function (req, res, next) {
     db.all('SELECT * FROM users', function (error, rows) {
         if (error) {
@@ -13,6 +14,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
+// Update multiple users at once
 router.patch('/', function (req, res, next) {
     if (req.body.action === 'usersDisable') {
         req.body.checkedUsers.forEach(id => {

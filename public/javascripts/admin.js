@@ -3,9 +3,13 @@ var data = {
     checkedUsers: []
 };
 
-axios.get('/users').then((res) => {
-    data.users = data.users.concat(res.data);
-});
+function updateUsers() {
+    axios.get('/users').then((res) => {
+        data.users = res.data;
+    });
+}
+
+updateUsers();
 
 var vm = new Vue({
     el: '#admin_panel',
@@ -16,9 +20,7 @@ var vm = new Vue({
                 checkedUsers: this.checkedUsers,
                 action: "usersDisable"
             });
-            axios.get('/users').then((res) => {
-                data.users = res.data;
-            });
+            updateUsers();
             this.checkedUsers = [];
         },
         usersEnable: function (event) {
@@ -26,9 +28,7 @@ var vm = new Vue({
                 checkedUsers: this.checkedUsers,
                 action: "usersEnable"
             });
-            axios.get('/users').then((res) => {
-                data.users = res.data;
-            });
+            updateUsers();
             this.checkedUsers = [];
         }
     }
