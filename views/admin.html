@@ -13,25 +13,25 @@
   <p>Logged in!</p>
 
   <div id="admin_panel">
-      <table>
-        <tr>
-          <th scope="col"></th>
-          <th scope="col">User ID</th>
-          <th scope="col">Username</th>
-          <th scope="col">Email</th>
-          <th scope="col">Enabled</th>
-        </tr>
-        <tr v-for="user in users">
-          <td><input type="checkbox" v-bind:value="user.id" v-model="checkedUsers"></td>
-          <td>{{ user.id }}</td>
-          <td>{{ user.username }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.enabled === 1 ? "True" : "False" }}</td>
-        </tr>
-      </table>
+    <table>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">User ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Enabled</th>
+      </tr>
+      <tr v-for="user in users">
+        <td><input type="checkbox" v-bind:value="user.id" v-model="checkedUsers" v-on:click="checkboxClicked"></td>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.enabled === 1 ? "True" : "False" }}</td>
+      </tr>
+    </table>
 
-      <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="usersDisable">Disable</button>
-      <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="usersEnable">Enable</button>
+    <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="usersDisable">Disable</button>
+    <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="usersEnable">Enable</button>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
