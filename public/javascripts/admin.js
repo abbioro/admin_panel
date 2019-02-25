@@ -28,6 +28,9 @@ var vm = new Vue({
         checkboxClicked: function (event) {
             // If holding shift and this was not the first click
             if (event.shiftKey && this.prevClickedCheckbox) {
+                // Don't select any text
+                document.getSelection().removeAllRanges();
+
                 var clickedId = Number(event.target.value);
                 var prevClickedId = Number(this.prevClickedCheckbox.value);
                 var selectedIds = [];
