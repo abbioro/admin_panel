@@ -3,7 +3,8 @@
 // Module dependencies
 var app = require('../app');
 var debug = require('debug')('admin-panel:server');
-var http = require('http');
+var https = require('https');
+var fs = require('fs');
 
 var db = require('../lib/db');
 
@@ -11,8 +12,14 @@ var db = require('../lib/db');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+var privateKey = fs.readFileSync('.ssl/localhost+2-key.pem');
+var certificate = fs.readFileSync('.ssl/localhost+2.pem');
+
 // Create HTTP server
-var server = http.createServer(app);
+var server = https.createServer({
+    key: privateKey,
+    cert: certificate
+}, app);
 
 // Listen on provided port, on all network interfaces
 server.listen(port);
