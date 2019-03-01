@@ -1,12 +1,32 @@
 var express = require('express');
+var bcrypt = require('bcrypt');
+
+var db = require('../lib/db');
+
 var router = express.Router();
 
 router.post('/', function (req, res, next) {
-    if (req.body.user_name === 'abbi') {
-        res.redirect('/admin');
-    } else {
-        res.send(req.body);
-    }
+    db.get('SELECT password FROM users WHERE username = ?',
+        req.body.username,
+        function (err, row) {
+            if (err) {
+                res.send(500);
+                return err;
+            }
+
+            if (row === undefined) {
+                res.status(400).send('Incorrect username or password.');
+                return;
+            }
+
+            if (bcrypt.compareSync(req.body.password, row.password)) {
+                res.redirect('/admin');
+                return;
+            } else {
+                res.status(400).send('Incorrect username or password.');
+                return;
+            }
+        });
 });
 
 module.exports = router;
