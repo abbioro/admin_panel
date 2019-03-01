@@ -14,8 +14,8 @@ var db = require('../lib/db');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-var privateKey = fs.readFileSync('.ssl/localhost+2-key.pem');
-var certificate = fs.readFileSync('.ssl/localhost+2.pem');
+var privateKey = fs.readFileSync(process.env.PRIVATE_KEY);
+var certificate = fs.readFileSync(process.env.CERTIFICATE);
 
 // Create HTTP server
 var server = https.createServer({
