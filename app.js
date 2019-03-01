@@ -5,11 +5,6 @@ var logger = require('morgan');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 
-// Local includes
-var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
-var adminRouter = require('./routes/admin');
-var usersRouter = require('./routes/users');
 var htmlEngine = require('./lib/html_engine');
 
 var app = express();
@@ -42,9 +37,10 @@ app.use(session({
 }));
 
 // Routers
-app.use('/', indexRouter);
-app.use('/login', loginRouter);
-app.use('/admin', adminRouter);
-app.use('/users', usersRouter);
+app.use('/', require('./routes/index'));
+app.use('/login', require('./routes/login'));
+app.use('/logout', require('./routes/logout'));
+app.use('/admin', require('./routes/admin'));
+app.use('/users', require('./routes/users'));
 
 module.exports = app;
