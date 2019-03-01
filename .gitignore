@@ -65,3 +65,6 @@ typings/
 
 # SSL certs
 .ssl
+
+# VS Code config
+.vscode
