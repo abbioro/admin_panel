@@ -2,7 +2,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var session = require('express-session')
+var session = require('express-session');
+var SQLiteStore = require('connect-sqlite3')(session);
 
 // Local includes
 var indexRouter = require('./routes/index');
@@ -27,12 +28,16 @@ app.set('view engine', 'html');
 // Sessions
 app.use(session({
     name: 'user_session',
+    store: new SQLiteStore({
+        db: 'sessions.sqlite3'
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 30 * 1000,
-        secure: true
+        maxAge: 60 * 1000, // 60 seconds
+        secure: true,
+        httpOnly: true
     }
 }));
 
