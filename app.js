@@ -22,13 +22,13 @@ app.set('view engine', 'html');
 
 // Sessions
 app.use(session({
-    name: 'user_session',
+    name: 'session',
     store: new SQLiteStore({
         db: 'sessions.sqlite3'
     }),
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         maxAge: 60 * 1000, // 60 seconds
         secure: true,

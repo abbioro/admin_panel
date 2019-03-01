@@ -20,6 +20,7 @@ router.post('/', function (req, res, next) {
             }
 
             if (bcrypt.compareSync(req.body.password, row.password)) {
+                req.session.logged_in = true;
                 res.redirect('/admin');
                 return;
             } else {
