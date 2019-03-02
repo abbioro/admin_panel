@@ -1,15 +1,8 @@
 var express = require('express');
+var restrict = require('../lib/restrict');
 var router = express.Router();
 
-router.get('/', function (req, res, next) {
-    if (!req.session.logged_in) {
-        req.session.destroy(function () {
-            res.clearCookie('session');
-            res.redirect('/');
-        });
-        return;
-    }
-
+router.get('/', restrict, function (req, res, next) {
     res.render('admin');
 });
 

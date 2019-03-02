@@ -5,6 +5,14 @@ var db = require('../lib/db');
 
 var router = express.Router();
 
+router.get('/', function (req, res, next) {
+    if (req.session.logged_in) {
+        res.redirect('/admin');
+        return;
+    }
+    res.render('login');
+})
+
 router.post('/', function (req, res, next) {
     db.get('SELECT password FROM users WHERE username = ?',
         req.body.username,

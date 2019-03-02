@@ -27,8 +27,8 @@ app.use(session({
         db: 'sessions.sqlite3'
     }),
     secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    resave: false, // don't save the session if unmodified
+    saveUninitialized: false, // don't create session until something is stored
     cookie: {
         maxAge: 60 * 1000, // 60 seconds
         secure: true,
