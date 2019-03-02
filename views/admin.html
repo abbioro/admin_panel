@@ -15,7 +15,7 @@
   <div id="admin_panel">
     <table>
       <tr>
-        <th scope="col"></th>
+        <th scope="col"><input type="checkbox" v-bind:checked="checkedUsers.length !== 0" v-on:click="toggleAll"></th>
         <th scope="col">ID</th>
         <th scope="col">Username</th>
         <th scope="col">Email</th>
@@ -28,7 +28,7 @@
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.enabled === 1 ? "True" : "False" }}</td>
-        <td>{{ user.password }}</td>
+        <td style="font-family: monospace">{{ user.password }}</td>
       </tr>
     </table>
 
@@ -44,7 +44,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="/javascripts/admin.js"></script>
+  <script src="/javascripts/admin_panel.js"></script>
 </body>
 
 </html>

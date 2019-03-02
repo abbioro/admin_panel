@@ -27,7 +27,7 @@ app.use(session({
     resave: false, // don't save the session if unmodified
     saveUninitialized: false, // don't create session until something is stored
     cookie: {
-        maxAge: 60 * 1000, // 60 seconds
+        maxAge: 60 * 60 * 1000, // 1 hour
         secure: true,
         httpOnly: true
     }

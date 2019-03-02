@@ -15,7 +15,6 @@ var vm = new Vue({
                 action: "usersDisable"
             });
             getUsers();
-            this.checkedUsers = [];
         },
         usersEnable: function (event) {
             axios.patch('/users', {
@@ -23,7 +22,6 @@ var vm = new Vue({
                 action: "usersEnable"
             });
             getUsers();
-            this.checkedUsers = [];
         },
         checkboxClicked: function (event) {
             // If holding shift and this was not the first click
@@ -56,6 +54,14 @@ var vm = new Vue({
 
             // Save the click
             this.prevClickedCheckbox = event.target;
+        },
+        toggleAll: function (event) {
+            if (this.checkedUsers.length === 0) {
+                var allIds = range(1, this.users.length + 1);
+                this.checkedUsers = this.checkedUsers.concat(allIds);
+            } else {
+                this.checkedUsers = [];
+            }
         }
     }
 });
