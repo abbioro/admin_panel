@@ -4,14 +4,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
+var helmet = require('helmet');
 
 var app = express();
 
-// Default middleware
+// Basic middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(helmet());
 
 // Set up HTML render engine
 app.engine('html', require('./lib/html_engine'));
