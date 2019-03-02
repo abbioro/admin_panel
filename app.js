@@ -5,8 +5,6 @@ var logger = require('morgan');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 
-var htmlEngine = require('./lib/html_engine');
-
 var app = express();
 
 // Default middleware
@@ -14,10 +12,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // Set up HTML render engine
-app.engine('html', htmlEngine);
+app.engine('html', require('./lib/html_engine'));
 app.set('view engine', 'html');
 
 // Sessions
@@ -36,9 +33,15 @@ app.use(session({
     }
 }));
 
-// Routers
+// --- Unrestricted routes ---
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/login', require('./routes/login'));
+
+// Any routes beneath this require authentication
+app.use('/', require('./lib/authenticate'));
+
+// --- Restricted routes ---
 app.use('/logout', require('./routes/logout'));
 app.use('/admin', require('./routes/admin'));
 app.use('/users', require('./routes/users'));
