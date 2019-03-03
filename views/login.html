@@ -13,6 +13,8 @@
 
   <div class="login">
     <form method="post" action="login">
+      <input type="hidden" class="csrf" name="_csrf">
+
       <div>
         <input type="text" id="username" name="username" placeholder="Username">
       </div>
@@ -26,6 +28,19 @@
       </div>
     </form>
   </div>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      axios.get('/csrfToken').then(function (res) {
+        console.log(res.data.token);
+        var csrfInputs = document.querySelectorAll('input.csrf');
+        for (var csrfInput of csrfInputs) {
+          csrfInput.value = res.data.token;
+        }
+      });
+    })
+  </script>
 </body>
 
 </html>
