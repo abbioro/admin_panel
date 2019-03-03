@@ -5,6 +5,10 @@ var data = {
 
 getUsers();
 
+axios.get('/csrfToken').then(function (res) {
+    console.log(res.data.token);
+});
+
 var vm = new Vue({
     el: '#admin_panel',
     data: data,

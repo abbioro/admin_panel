@@ -39,6 +39,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', require('./routes/index'));
 app.use('/login', require('./routes/login'));
+app.use('/csrfToken', require('./routes/csrfToken'));
 
 // Any routes beneath this require authentication
 app.use('/', require('./lib/authenticate'));
