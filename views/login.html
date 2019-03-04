@@ -13,8 +13,6 @@
 
   <div class="login">
     <form method="post" action="login">
-      <input type="hidden" class="csrf" name="_csrf">
-
       <div>
         <input type="text" id="username" name="username" placeholder="Username">
       </div>
@@ -30,7 +28,7 @@
   </div>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="/javascripts/injectCsrfTokens.js"></script>
+  <script src="/javascripts/common.js"></script>
 </body>
 
 </html>
