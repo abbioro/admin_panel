@@ -3,6 +3,12 @@ var data = {
     checkedUsers: []
 };
 
+axios.get("/csrfToken").then(function (res) {
+    window.axios.defaults.headers.common = {
+        'X-CSRF-TOKEN': res.data.token
+    };
+});
+
 getUsers();
 
 var vm = new Vue({
@@ -13,15 +19,17 @@ var vm = new Vue({
             axios.patch('/users', {
                 userIds: this.checkedUsers,
                 action: "usersDisable"
+            }).then(function (res) {
+                getUsers();
             });
-            getUsers();
         },
         usersEnable: function (event) {
             axios.patch('/users', {
                 userIds: this.checkedUsers,
                 action: "usersEnable"
+            }).then(function (res) {
+                getUsers();
             });
-            getUsers();
         },
         checkboxClicked: function (event) {
             // If holding shift and this was not the first click
