@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(helmet());
 
 // Set up HTML render engine
-app.engine('html', require('./lib/html_engine'));
+app.engine('html', require('./lib/htmlEngine'));
 app.set('view engine', 'html');
 
 // Sessions

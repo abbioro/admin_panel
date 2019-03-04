@@ -5,16 +5,6 @@ var data = {
 
 getUsers();
 
-window.addEventListener('load', function() {
-    axios.get('/csrfToken').then(function (res) {
-        console.log(res.data.token);
-        var csrfInputs = document.querySelectorAll('input.csrf');
-        for (var csrfInput of csrfInputs) {
-            csrfInput.value = res.data.token;
-        }
-    });
-})
-
 var vm = new Vue({
     el: '#admin_panel',
     data: data,

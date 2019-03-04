@@ -30,17 +30,7 @@
   </div>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script>
-    window.addEventListener('load', function () {
-      axios.get('/csrfToken').then(function (res) {
-        console.log(res.data.token);
-        var csrfInputs = document.querySelectorAll('input.csrf');
-        for (var csrfInput of csrfInputs) {
-          csrfInput.value = res.data.token;
-        }
-      });
-    })
-  </script>
+  <script src="/javascripts/injectCsrfTokens.js"></script>
 </body>
 
 </html>
