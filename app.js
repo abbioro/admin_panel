@@ -5,7 +5,6 @@ var logger = require('morgan');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 var helmet = require('helmet');
-var uid = require('uid-safe'); // TODO: Use libsodium
 
 var app = express();
 
@@ -36,13 +35,8 @@ app.use(session({
     }
 }));
 
-// everyone gets tokens
-app.use('/', function (req, res, next) {
-    if (!req.session.token) {
-        req.session.token = uid.sync(32); // TODO: Use libsodium
-    }
-    next();
-})
+// Generate a unique random CSRF token per session for everyone
+app.use('/', require('./lib/addCsrfToken'));
 
 // Verify CSRF tokens for all POST paths
 app.post('*', require('./lib/csrfProtect'));
