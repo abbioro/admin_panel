@@ -45,6 +45,10 @@ h1 {
     padding: 10px;
 }
 
+#admin_panel td.password {
+    font-family: monospace;
+}
+
 #admin_panel th {
     padding: 10px;
     background-color: #3c84e2;
