@@ -5,7 +5,7 @@ var data = {
 
 axios.get("/csrfToken").then(function (res) {
     window.axios.defaults.headers.common = {
-        'X-CSRF-TOKEN': res.data.token
+        'csrf-token': res.data.token
     };
 });
 

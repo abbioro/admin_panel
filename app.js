@@ -5,6 +5,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 var helmet = require('helmet');
+var csrfProtection = require('csurf')();
 
 var app = express();
 
@@ -35,14 +36,9 @@ app.use(session({
     }
 }));
 
-// Generate a unique random CSRF token per session for everyone
-app.use('/', require('./lib/addCsrfToken'));
-
-// Verify CSRF tokens for all state-modifying verbs
-app.post('*', require('./lib/csrfProtect'));
-app.patch('*', require('./lib/csrfProtect'));
-app.delete('*', require('./lib/csrfProtect'));
-app.put('*', require('./lib/csrfProtect'));
+// Enable csrf protection on all routes, csurf ignores
+// GET requests by default so it won't break
+app.use('/', csrfProtection);
 
 // --- Unrestricted routes ---
 app.use(express.static(path.join(__dirname, 'public')));
