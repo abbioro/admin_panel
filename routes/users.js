@@ -3,31 +3,35 @@ var db = require('../lib/db');
 
 var router = express.Router();
 
-// Get users as JSON
 router.get('/', function (req, res, next) {
-    db.all('SELECT * FROM users', function (error, rows) {
-        if (error) {
-            console.log(error);
-        } else {
-            res.json(rows);
-        }
-    });
+    sendUsers(res);
 });
 
-// Update multiple users at once
 router.patch('/', function (req, res, next) {
-    if (req.body.action === 'usersDisable') {
-        req.body.userIds.forEach(id => {
-            db.run('UPDATE users SET enabled = ? WHERE id = ?', 0, id);
+    var data = req.body;
+
+    if (data.action === 'setEnabled') {
+        var stmt = db.prepare('UPDATE users SET enabled = ? WHERE id = ?');
+
+        for (var id of data.userIds) {
+            stmt.run(data.value, id);
+        }
+
+        stmt.finalize(function () {
+            sendUsers(res);
         });
-        res.send(204);
-    }
-    if (req.body.action === 'usersEnable') {
-        req.body.userIds.forEach(id => {
-            db.run('UPDATE users SET enabled = ? WHERE id = ?', 1, id);
-        });
-        res.send(204);
     }
 });
 
 module.exports = router;
+
+function sendUsers(res) {
+    db.all('SELECT * FROM users', function (error, rows) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            res.json(rows);
+        }
+    });
+}

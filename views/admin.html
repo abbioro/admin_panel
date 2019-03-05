@@ -32,8 +32,8 @@
       </tr>
     </table>
 
-    <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="usersDisable">Disable</button>
-    <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="usersEnable">Enable</button>
+    <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="setEnabled(0)">Disable</button>
+    <button type="submit" v-bind:disabled="checkedUsers.length === 0" v-on:click="setEnabled(1)">Enable</button>
     <br>
     <br>
 

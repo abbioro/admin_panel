@@ -16,20 +16,15 @@ var vm = new Vue({
     el: '#admin_panel',
     data: data,
     methods: {
-        usersDisable: function (event) {
-            axios.patch('/users', {
+        setEnabled: function (value) {
+            var payload = {
                 userIds: this.checkedUsers,
-                action: "usersDisable"
-            }).then(function (res) {
-                getUsers();
-            });
-        },
-        usersEnable: function (event) {
-            axios.patch('/users', {
-                userIds: this.checkedUsers,
-                action: "usersEnable"
-            }).then(function (res) {
-                getUsers();
+                action: 'setEnabled',
+                value: value
+            };
+
+            axios.patch('/users', payload).then(function (res) {
+                data.users = res.data;
             });
         },
         checkboxClicked: function (event) {
