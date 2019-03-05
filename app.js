@@ -5,7 +5,7 @@ var logger = require('morgan');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 var helmet = require('helmet');
-var csrfProtection = require('csurf')();
+var csurf = require('csurf');
 
 var app = express();
 
@@ -38,6 +38,7 @@ app.use(session({
 
 // Enable csrf protection on all routes, csurf ignores
 // GET requests by default so it won't break
+var csrfProtection = csurf({ cookie: true });
 app.use('/', csrfProtection);
 
 // --- Unrestricted routes ---
