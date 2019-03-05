@@ -22,7 +22,7 @@
         <th scope="col">Enabled</th>
         <th scope="col">Password (hashed)</th>
       </tr>
-      <tr v-for="user in users">
+      <tr v-for="user in users" v-cloak>
         <td><input type="checkbox" v-bind:value="user.id" v-model="checkedUsers" v-on:click="checkboxClicked"></td>
         <td>{{ user.id }}</td>
         <td>{{ user.username }}</td>
