@@ -61,3 +61,12 @@ h1 {
     color: white;
     font-weight: normal;
 }
+
+#admin_panel #refresh button {
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+#admin_panel #refresh em {
+    opacity: 0.5;
+}

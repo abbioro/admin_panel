@@ -1,6 +1,7 @@
 var data = {
     users: [],
-    checkedUsers: []
+    checkedUsers: [],
+    lastRefresh: Date()
 };
 
 axios.get("/csrfToken").then(function (res) {
@@ -10,12 +11,16 @@ axios.get("/csrfToken").then(function (res) {
     };
 });
 
-getUsers();
-
 var vm = new Vue({
     el: '#admin_panel',
     data: data,
     methods: {
+        getUsers: function () {
+            axios.get('/users').then((res) => {
+                data.users = res.data;
+                data.lastRefresh = Date();
+            });
+        },
         setEnabled: function (value) {
             var payload = {
                 userIds: this.checkedUsers,
@@ -25,6 +30,7 @@ var vm = new Vue({
 
             axios.patch('/users', payload).then(function (res) {
                 data.users = res.data;
+                data.lastRefresh = Date();
             });
         },
         checkboxClicked: function (event) {
@@ -70,11 +76,7 @@ var vm = new Vue({
     }
 });
 
-function getUsers() {
-    axios.get('/users').then((res) => {
-        data.users = res.data;
-    });
-}
+vm.getUsers();
 
 // Create a range from [start, end)
 function range(start, end) {

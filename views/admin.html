@@ -13,6 +13,10 @@
   <h1>Admin Panel</h1>
 
   <div id="admin_panel">
+    <div id="refresh">
+      <button v-on:click="getUsers">Refresh</button>
+      <em>Last refreshed: {{ lastRefresh }}</em>
+    </div>
     <table>
       <tr>
         <th scope="col"><input type="checkbox" v-bind:checked="checkedUsers.length !== 0" v-on:click="toggleAll"></th>
