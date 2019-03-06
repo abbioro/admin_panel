@@ -4,13 +4,6 @@ var data = {
     lastRefresh: Date()
 };
 
-axios.get("/csrfToken").then(function (res) {
-    window.axios.defaults.headers.common = {
-        'CSRF-Token': res.data.token,
-        'X-Requested-With': 'XMLHttpRequest'
-    };
-});
-
 var vm = new Vue({
     el: '#admin_panel',
     data: data,
