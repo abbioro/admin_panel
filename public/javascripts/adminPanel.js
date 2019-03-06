@@ -7,6 +7,9 @@ var data = {
 var vm = new Vue({
     el: '#admin_panel',
     data: data,
+    created: function () {
+        this.getUsers();
+    },
     methods: {
         getUsers: function () {
             axios.get('/users').then((res) => {
@@ -68,8 +71,6 @@ var vm = new Vue({
         }
     }
 });
-
-vm.getUsers();
 
 // Create a range from [start, end)
 function range(start, end) {
