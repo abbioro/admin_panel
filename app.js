@@ -36,8 +36,10 @@ app.use(session({
     }
 }));
 
-// Enable csrf protection on all routes, csurf ignores
-// GET requests by default so it won't break
+// Enable csrf protection on all routes. csurf ignores GET requests by default
+// so this won't break anything. Use cookies for storing the secret so that CSRF
+// protection works even if the user session expires (so they can POST to
+// /logout without getting a CSRF error).
 var csrfProtection = csurf({ cookie: true });
 app.use('/', csrfProtection);
 
